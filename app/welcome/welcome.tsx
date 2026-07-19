@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import logoDark from "./logo-dark.svg";
 import logoLight from "./logo-light.svg";
 
@@ -20,6 +21,28 @@ export function Welcome() {
           </div>
         </header>
         <div className="max-w-[300px] w-full space-y-6 px-4">
+          <nav className="rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-4">
+            <p className="leading-6 text-gray-700 dark:text-gray-200 text-center">
+              Pages
+            </p>
+            <ul>
+              {pages.map(({ href, text, description }) => (
+                <li key={href}>
+                  <Link
+                    className="group flex flex-col gap-0.5 self-stretch rounded-xl p-3 leading-normal hover:bg-gray-50 dark:hover:bg-gray-800"
+                    to={href}
+                  >
+                    <span className="text-blue-700 group-hover:underline dark:text-blue-500">
+                      {text}
+                    </span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      {description}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
           <nav className="rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-4">
             <p className="leading-6 text-gray-700 dark:text-gray-200 text-center">
               What&apos;s next?
@@ -45,6 +68,19 @@ export function Welcome() {
     </main>
   );
 }
+
+const pages = [
+  {
+    href: "/dashboard",
+    text: "Dashboard",
+    description: "Vue d'ensemble avec sidebar de navigation",
+  },
+  {
+    href: "/ddd-example",
+    text: "Exemple DDD",
+    description: "Démo du module 'user' (domain/application/infra/UI)",
+  },
+];
 
 const resources = [
   {
