@@ -1,0 +1,1 @@
+export type EtatEleve = "ACTIF" | "ARCHIVE";
