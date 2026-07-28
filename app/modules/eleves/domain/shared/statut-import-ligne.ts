@@ -1,0 +1,1 @@
+export type StatutImportLigne = "VALIDE" | "CREEE" | "REJETEE";
