@@ -33,6 +33,7 @@ export class Entete extends ValueObject<EnteteProps> {
   }
 
   private static verifier(
+     
     lignes: EnteteLigne[],
     predicat: (l: EnteteLigne) => boolean,
     nomVersion: "française" | "anglaise"
