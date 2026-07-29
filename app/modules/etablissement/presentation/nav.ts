@@ -1,28 +1,78 @@
-export interface ModuleNavRoute {
-  title: string;
-  path: string;
-  icon: string;
+import {
+  BookUserIcon,
+  BuildingIcon,
+  FileTextIcon,
+  ShieldIcon,
+  UsersIcon,
+  type LucideIcon,
+} from "lucide-react"
+
+export type EtablissementSectionKey =
+  | "portefeuille"
+  | "fiche"
+  | "en-tete"
+  | "signataires"
+  | "audit"
+
+export interface EtablissementNavItem {
+  key: EtablissementSectionKey
+  title: string
+  description: string
+  icon: LucideIcon
 }
 
-export const ETABLISSEMENT_NAV_ROUTES: ModuleNavRoute[] = [
+export interface EtablissementNavSection {
+  title: string
+  items: EtablissementNavItem[]
+}
+
+export const etablissementNavSections: EtablissementNavSection[] = [
   {
-    title: 'Portefeuille Établissements',
-    path: '/dashboard/etablissements',
-    icon: 'building',
+    title: "Établissements",
+    items: [
+      {
+        key: "portefeuille",
+        title: "Portefeuille Établissements",
+        description: "Liste, recherche et création des établissements",
+        icon: BuildingIcon,
+      },
+    ],
   },
   {
-    title: 'Configuration En-Tête',
-    path: '/dashboard/etablissements/en-tete',
-    icon: 'file-text',
+    title: "Fiche établissement",
+    items: [
+      {
+        key: "fiche",
+        title: "Fiche & Localisation",
+        description: "Identité administrative et ancrage territorial",
+        icon: BookUserIcon,
+      },
+      {
+        key: "en-tete",
+        title: "Configuration En-Tête",
+        description: "En-tête officiel des documents (mode simple/bilingue)",
+        icon: FileTextIcon,
+      },
+      {
+        key: "signataires",
+        title: "Signataires Officiels",
+        description: "Personnes habilitées à signer les documents",
+        icon: UsersIcon,
+      },
+    ],
   },
   {
-    title: 'Signataires Officiels',
-    path: '/dashboard/etablissements/signataires',
-    icon: 'users',
+    title: "Traçabilité",
+    items: [
+      {
+        key: "audit",
+        title: "Journal Audit & Traçabilité",
+        description: "Historique des actions sur les établissements",
+        icon: ShieldIcon,
+      },
+    ],
   },
-  {
-    title: 'Journal Audit & Traçabilité',
-    path: '/dashboard/etablissements/audit',
-    icon: 'shield',
-  },
-];
+]
+
+export const etablissementNavItemsFlat: EtablissementNavItem[] =
+  etablissementNavSections.flatMap((section) => section.items)

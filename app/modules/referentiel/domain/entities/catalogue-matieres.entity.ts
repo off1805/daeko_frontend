@@ -46,24 +46,31 @@ export class MatiereReferentiel extends ReferentielEntity<MatiereReferentielProp
   get sousSystemeId(): string {
     return this.props.sousSystemeId;
   }
+
   get code(): string {
     return this.props.code;
   }
+
   get libelle(): LibelleBilingue {
     return this.props.libelle;
   }
+
   get libelleCourt(): string | undefined {
     return this.props.libelleCourt;
   }
+
   get domaine(): DomaineMatiere {
     return this.props.domaine;
   }
+
   get typeMatiere(): TypeMatiere {
     return this.props.typeMatiere;
   }
+
   get baremeParDefaut(): number {
     return this.props.baremeParDefaut;
   }
+  
   get description(): string | undefined {
     return this.props.description;
   }

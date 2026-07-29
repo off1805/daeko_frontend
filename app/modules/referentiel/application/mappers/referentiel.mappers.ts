@@ -3,19 +3,29 @@ import type {
   SousSysteme,
   TypeEnseignement,
 } from "~/modules/referentiel/domain/entities/tables-racines.entity";
+
+
 import type {
   Cycle,
   Niveau,
 } from "~/modules/referentiel/domain/entities/chaine-temporelle.entity";
+
+
 import type {
   Filiere,
   Serie,
 } from "~/modules/referentiel/domain/entities/chaine-pedagogique.entity";
+
+
 import type {
   MatiereReferentiel,
   MatiereReferentielNiveau,
 } from "~/modules/referentiel/domain/entities/catalogue-matieres.entity";
+
+
 import type { AuditEntry } from "~/modules/referentiel/domain/entities/audit-entry.entity";
+
+
 import type {
   AuditEntryDto,
   CycleDto,
@@ -40,7 +50,9 @@ function toLifecycleDto(entity: {
   dateModification: string;
   creePar: string;
   modifiePar: string;
-}): ReferentielLifecycleDto {
+}):
+
+ReferentielLifecycleDto {
   return {
     id: entity.id,
     etat: entity.etat,

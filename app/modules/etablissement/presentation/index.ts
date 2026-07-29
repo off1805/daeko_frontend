@@ -1,10 +1,11 @@
 // Point d'entrée public du module Établissement
-export * from './components/EtablissementPortfolioSection';
-export * from './components/FicheIdentiteSection';
-export * from './components/LocalisationSection';
-export * from './components/EditeurEnTeteSection';
-export * from './components/SignatairesSection';
-export * from './components/HistoriqueEtablissementSection';
+export * from './components/sections/portefeuille-section';
+export * from './components/sections/fiche-identite-section';
+export * from './components/sections/localisation-section';
+export * from './components/sections/en-tete-section';
+export * from './components/sections/signataires-section';
+export * from './components/sections/historique-section';
+export * from './components/sections/etablissement-sidebar';
 export * from './nav';
 
 // Exportation des conteneurs et use-cases pour la liaison directe
