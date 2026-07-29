@@ -22,30 +22,13 @@ interface InscriptionProps {
   dateModification: string;
 }
 
-/**
- * L'inscription — agrégat racine (dossier technique §2.3 ; dossier
- * fonctionnel §3.3). Le cœur du module : relie un élève à une classe
- * pour une année. Référence l'élève par id seulement (agrégat séparé,
- * cf. échange précédent) — jamais de copie de l'identité ici.
- *
- *  Toutes les vérifications qui nécessitent de consulter un autre
- * agrégat ou un autre module (unicité de l'inscription active pour
- * l'année, état de l'année académique, disponibilité de la classe) ne
- * sont PAS faites ici — elles appartiennent à la couche application,
- * qui orchestre repositories + NumeroOrdreService avant d'appeler ces
- * méthodes. Ce fichier protège uniquement les invariants qu'il peut
- * connaître seul.
- */
+
 export class Inscription extends Entity<InscriptionProps> {
   private constructor(props: InscriptionProps, id: string) {
     super(props, id);
   }
 
-  /**
-   * CU-03. Le numéro d'ordre est un paramètre reçu, déjà calculé par
-   * NumeroOrdreService — cette entité ne sait pas compter les élèves
-   * des autres inscriptions.
-   */
+  
   static create(
     id: string,
     props: {
@@ -107,6 +90,10 @@ export class Inscription extends Entity<InscriptionProps> {
     return this.props.etat === "ACTIVE";
   }
 
+  get dateInscription(): string {
+    return this.props.dateInscription;
+  }
+
   get dateCloture(): string | null {
     return this.props.dateCloture ?? null;
   }
@@ -124,6 +111,9 @@ export class Inscription extends Entity<InscriptionProps> {
   /**
    * @param nouveauNumeroOrdre Déjà calculé par NumeroOrdreService pour la classe cible.
    */
+  ajusterNumeroOrdre(nouveauNumero: number, maintenant: string): Inscription {
+    return this.copierAvec({ numeroOrdre: nouveauNumero }, maintenant);
+  }
   muter(
     classeCibleId: string,
     nouveauNumeroOrdre: number,
@@ -182,11 +172,7 @@ export class Inscription extends Entity<InscriptionProps> {
     );
   }
 
-  /**
-   * CU-05 (garde-fou) / ELV-009. Le numéro d'ordre à restaurer est
-   * calculé par la couche application (libre ou suivant disponible,
-   * dossier fonctionnel §6, CU-05) — reçu ici en paramètre.
-   */
+
   reactiver(numeroOrdre: number, maintenant: string): Inscription {
     if (this.props.etat === "ACTIVE") {
       throw new Error("Cette inscription est déjà active.");
