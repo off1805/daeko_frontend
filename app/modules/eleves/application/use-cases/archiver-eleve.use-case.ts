@@ -3,7 +3,7 @@ import type { ClockPort } from "~/shared/application/ports";
 import type { EleveRepository } from "../../domain/repositories/eleve.repository";
 import type { InscriptionRepository } from "../../domain/repositories/inscription.repository";
 import { EleveIntrouvableError } from "../../domain/errors/eleve.errors";
-import { EleveAvecInscriptionError } from "../../domain/errors/eleve.errors";
+import { InscriptionActiveEmpecheArchivageError } from "../../domain/errors/eleve.errors";
 import { EleveMapper } from "../mappers/eleve.mapper";
 import type { EleveReadDto } from "../dto/eleve-read.dto";
 
@@ -38,7 +38,7 @@ export class ArchiverEleveUseCase
       input.anneeAcademiqueEnCoursId
     );
     if (inscriptionActive) {
-      throw new EleveAvecInscriptionError();
+      throw new InscriptionActiveEmpecheArchivageError();
     }
 
     const maintenant = this.clock.maintenant();

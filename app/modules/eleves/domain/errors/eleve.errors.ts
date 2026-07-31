@@ -11,6 +11,13 @@ export class MatriculeDejaExistantError extends DomainError {
   }
 }
 
+/** Archivage refusé tant qu'une inscription active existe — distinct de ELV-007 (suppression). */
+export class InscriptionActiveEmpecheArchivageError extends DomainError {
+  readonly code = "ELV-007";
+  constructor() {
+    super("Impossible d'archiver : clôturez d'abord son inscription active.");
+  }
+}
 /** ELV-002 : fiche, tuteur ou inscription introuvable dans le périmètre de l'établissement. */
 export class EleveIntrouvableError extends DomainError {
   readonly code = "ELV-002";

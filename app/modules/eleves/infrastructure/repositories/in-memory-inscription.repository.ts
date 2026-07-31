@@ -13,7 +13,6 @@ export class InMemoryInscriptionRepository implements InscriptionRepository {
     inscriptionsSeed.map((i) => [i.id, i])
   );
 
-  
   constructor(private readonly eleveRepository: EleveRepository) {}
 
   async obtenirParId(id: string): Promise<Inscription | null> {
@@ -55,6 +54,18 @@ export class InMemoryInscriptionRepository implements InscriptionRepository {
     );
   }
 
+  /** NOUVEAU : même recherche que ci-dessus, mais SANS filtrer sur estActive. */
+  async obtenirParEleveEtAnnee(
+    eleveId: string,
+    anneeAcademiqueId: string
+  ): Promise<Inscription | null> {
+    return (
+      Array.from(this.inscriptions.values()).find(
+        (i) => i.eleveId === eleveId && i.anneeAcademiqueId === anneeAcademiqueId
+      ) ?? null
+    );
+  }
+
   async listerActivesPourNumerotation(
     classeId: string
   ): Promise<InscriptionActivePourNumerotation[]> {
@@ -68,7 +79,7 @@ export class InMemoryInscriptionRepository implements InscriptionRepository {
         inscription.eleveId,
         inscription.etablissementId
       );
-      if (!eleve) continue; // ne devrait jamais arriver en pratique (intégrité référentielle)
+      if (!eleve) continue;
       resultats.push({
         inscriptionId: inscription.id,
         numeroOrdreActuel: inscription.numeroOrdre,

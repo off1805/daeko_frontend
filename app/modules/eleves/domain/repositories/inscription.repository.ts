@@ -8,15 +8,18 @@ export interface PageResultat<T> {
   taille: number;
 }
 
-/** GET /classes/{classeId}/inscriptions — dossier technique §5.3. */
 export interface FiltresInscriptionsParClasse {
   classeId: string;
-  etat?: "TOUTES" | string; // défaut : actives seulement (dossier technique §5.3)
+  etat?: "TOUTES" | string;
   page?: number;
   taille?: number;
 }
 
-
+/**
+ * Port du module Élèves — agrégat Inscription (dossier technique §5.3,
+ * §4.1). Interface uniquement ; l'implémentation vit dans
+ * l'infrastructure.
+ */
 export interface InscriptionRepository {
   obtenirParId(id: string): Promise<Inscription | null>;
 
@@ -31,20 +34,24 @@ export interface InscriptionRepository {
   ): Promise<Inscription | null>;
 
   /**
-   * Entrée nécessaire à NumeroOrdreService.attribuer() : les
-   * inscriptions actives de la classe cible, avec juste ce qu'il faut
-   * pour trier alphabétiquement (nom/prénoms de l'élève, déjà résolus
-   * par l'infrastructure via une jointure ou un appel au module Eleve).
+   * NOUVEAU : contrairement à obtenirInscriptionActive() (qui ignore
+   * les inscriptions déjà closes), celle-ci renvoie l'inscription de
+   * l'élève pour cette année QUEL QUE SOIT SON ÉTAT — nécessaire pour
+   * que l'écran détail sache afficher "Réactiver" sur une inscription
+   * déjà terminée.
    */
+  obtenirParEleveEtAnnee(
+    eleveId: string,
+    anneeAcademiqueId: string
+  ): Promise<Inscription | null>;
+
   listerActivesPourNumerotation(
     classeId: string
   ): Promise<InscriptionActivePourNumerotation[]>;
 
   listerMutations(inscriptionId: string): Promise<Inscription["mutations"]>;
 
-  /** Persiste une inscription, nouvelle ou déjà existante. */
   sauvegarder(inscription: Inscription): Promise<void>;
-
 
   cloturerToutesActivesPourAnnee(anneeAcademiqueId: string): Promise<void>;
 }

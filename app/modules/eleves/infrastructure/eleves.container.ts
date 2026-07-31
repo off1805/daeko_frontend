@@ -26,7 +26,7 @@ import { MuterInscriptionUseCase } from "../application/use-cases/muter-inscript
 import { CloturerInscriptionUseCase } from "../application/use-cases/cloturer-inscription.use-case";
 import { ReactiverInscriptionUseCase } from "../application/use-cases/reactiver-inscription.use-case";
 import { ListerInscriptionsClasseUseCase } from "../application/use-cases/lister-inscriptions-classe.use-case";
-
+import { ObtenirInscriptionEleveUseCase } from "../application/use-cases/obtenir-inscription-eleve.use-case";
 import { TeleverserImportUseCase } from "../application/use-cases/televerser-import.use-case";
 import { EnregistrerCorrespondanceImportUseCase } from "../application/use-cases/enregistrer-correspondance-import.use-case";
 import { PrevisualiserImportUseCase } from "../application/use-cases/previsualiser-import.use-case";
@@ -73,6 +73,9 @@ class ElevesContainer {
   readonly listerElevesUseCase = new ListerElevesUseCase(this.eleveRepository);
 
   // --- Cas d'usage : Inscription + Mutation ------------------------------
+  readonly obtenirInscriptionEleveUseCase = new ObtenirInscriptionEleveUseCase(
+    this.inscriptionRepository
+  );
   readonly inscrireEleveUseCase = new InscrireEleveUseCase(
     this.inscriptionRepository,
     this.eleveRepository,

@@ -11,19 +11,19 @@ import type { ImportLotReadDto } from "../dto/import-read.dto";
 export interface TeleverserImportInputDto {
   etablissementId: string;
   fichierNom: string;
-  fichierRef: string; // référence de stockage, jamais le contenu brut
+  fichierRef: string;
   classeCibleId?: string;
   creePar: string;
 }
 
-/**
- * POST /imports (dossier technique §5.4). Lit le fichier en streaming,
- * crée le lot ET toutes ses lignes brutes (statut VALIDE) — la
- * correspondance et la création des fiches viennent dans des étapes
- * séparées (voir fichiers suivants).
- */
+/** Sortie enrichie : les colonnes détectées sont nécessaires à l'écran de correspondance (étape suivante). */
+export interface TeleverserImportResultDto {
+  lot: ImportLotReadDto;
+  colonnesDetectees: string[];
+}
+
 export class TeleverserImportUseCase
-  implements UseCase<TeleverserImportInputDto, ImportLotReadDto>
+  implements UseCase<TeleverserImportInputDto, TeleverserImportResultDto>
 {
   constructor(
     private readonly importLotRepository: ImportLotRepository,
@@ -33,11 +33,11 @@ export class TeleverserImportUseCase
     private readonly clock: ClockPort
   ) {}
 
-  async execute(input: TeleverserImportInputDto): Promise<ImportLotReadDto> {
+  async execute(input: TeleverserImportInputDto): Promise<TeleverserImportResultDto> {
     const entetes = await this.parser.detecterEntetes(input.fichierRef);
 
     const lotId = this.idGenerator.generer();
-    let lot = ImportLot.televerser(lotId, {
+    const lot = ImportLot.televerser(lotId, {
       etablissementId: input.etablissementId,
       fichierNom: input.fichierNom,
       nbLignes: entetes.nombreLignesEstime,
@@ -46,7 +46,6 @@ export class TeleverserImportUseCase
       maintenant: this.clock.maintenant(),
     });
 
-    // Écriture des lignes brutes par lot de 200, jamais tout le fichier chargé en mémoire d'un coup.
     let tampon: ImportLigne[] = [];
     for await (const ligneBrute of this.parser.lireLignesBrutes(input.fichierRef)) {
       tampon.push(
@@ -66,6 +65,6 @@ export class TeleverserImportUseCase
     }
 
     await this.importLotRepository.sauvegarder(lot);
-    return ImportMapper.lotVersDto(lot);
+    return { lot: ImportMapper.lotVersDto(lot), colonnesDetectees: entetes.colonnes };
   }
 }
