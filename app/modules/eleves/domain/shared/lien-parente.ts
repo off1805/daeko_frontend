@@ -1,0 +1,1 @@
+export type LienParente = "PERE" | "MERE" | "TUTEUR" | "AUTRE";
