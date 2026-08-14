@@ -38,7 +38,9 @@ body {
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -53,82 +55,168 @@ body {
   --color-card: var(--card);
   --color-foreground: var(--foreground);
   --color-background: var(--background);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Couleurs fonctionnelles (charte §3.3) */
+  --color-success-bg: var(--success-bg);
+  --color-success-text: var(--success-text);
+  --color-success-solid: var(--success-solid);
+  --color-warning-bg: var(--warning-bg);
+  --color-warning-text: var(--warning-text);
+  --color-warning-solid: var(--warning-solid);
+  --color-danger-bg: var(--danger-bg);
+  --color-danger-text: var(--danger-text);
+  --color-danger-solid: var(--danger-solid);
+
+  /* Badges officiel / personnalisé (charte §3.4) */
+  --color-official-bg: var(--official-bg);
+  --color-official-text: var(--official-text);
+  --color-custom-bg: var(--custom-bg);
+  --color-custom-text: var(--custom-text);
+
+  /* Rayons — charte §6.3 : trois valeurs fixes, jamais d'autre. */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 12px;
+  --radius-2xl: 12px;
+  --radius-3xl: 12px;
+  --radius-4xl: 12px;
+
+  /* État de chargement — charte §9.3 : shimmer subtil, pas de pulse générique. */
+  --animate-shimmer: shimmer 1.6s linear infinite;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  /* Neutres — charte §3.2 (mode clair) */
+  --background: #fafaf9;
+  --foreground: #1c1917;
+  --card: #ffffff;
+  --card-foreground: #1c1917;
+  --popover: #ffffff;
+  --popover-foreground: #1c1917;
+  --border: #e7e5e4;
+  --border-strong: #d6d3d1;
+  --input: #e7e5e4;
+  --muted: #f5f5f4;
+  --muted-foreground: #78716c;
+  --secondary: #f5f5f4;
+  --secondary-foreground: #1c1917;
+
+  /* Indigo Daeko — charte §3.1 */
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --accent: #eef2ff;
+  --accent-foreground: #1e1b4b;
+  --ring: #4f46e5;
+
+  /* Couleurs fonctionnelles — charte §3.3 (mode clair) */
+  --success-bg: #d1fae5;
+  --success-text: #065f46;
+  --success-solid: #059669;
+  --warning-bg: #fef3c7;
+  --warning-text: #92400e;
+  --warning-solid: #d97706;
+  --danger-bg: #fee2e2;
+  --danger-text: #991b1b;
+  --danger-solid: #dc2626;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  /* Badges officiel / personnalisé — charte §3.4 (mode clair) */
+  --official-bg: #eef2ff;
+  --official-text: #4338ca;
+  --custom-bg: #f5f3ff;
+  --custom-text: #6d28d9;
+
+  /* Ombre popover unique autorisée — charte §6.4 */
+  --shadow-popover: 0 4px 12px rgba(28, 25, 23, 0.08), 0 2px 4px rgba(28, 25, 23, 0.04);
+
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.45rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+
+  /* Sidebar — charte §8.7 : fond = fond de page (pas surface carte) */
+  --sidebar: #fafaf9;
+  --sidebar-foreground: #1c1917;
+  --sidebar-primary: #4f46e5;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eef2ff;
+  --sidebar-accent-foreground: #1e1b4b;
+  --sidebar-border: #e7e5e4;
+  --sidebar-ring: #4f46e5;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  /* Neutres — charte §3.2 (mode sombre) */
+  --background: #1c1917;
+  --foreground: #fafaf9;
+  --card: #292524;
+  --card-foreground: #fafaf9;
+  --popover: #292524;
+  --popover-foreground: #fafaf9;
+  --border: #44403c;
+  --border-strong: #57534e;
+  --input: #44403c;
+  --muted: #1f1d19;
+  --muted-foreground: #a8a29e;
+  --secondary: #34302c;
+  --secondary-foreground: #fafaf9;
+
+  /* Indigo Daeko — charte §3.1 (mode sombre, désaturé/éclairci) */
+  --primary: #818cf8;
+  --primary-foreground: #c7d2fe;
+  --accent: #312e81;
+  --accent-foreground: #c7d2fe;
+  --ring: #818cf8;
+
+  /* Couleurs fonctionnelles — charte §3.3 (mode sombre) */
+  --success-bg: #064e3b;
+  --success-text: #a7f3d0;
+  --success-solid: #34d399;
+  --warning-bg: #78350f;
+  --warning-text: #fde68a;
+  --warning-solid: #fbbf24;
+  --danger-bg: #7f1d1d;
+  --danger-text: #fecaca;
+  --danger-solid: #f87171;
+  --destructive: #f87171;
+  --destructive-foreground: #1c1917;
+
+  /* Badges officiel / personnalisé — charte §3.4 (mode sombre) */
+  --official-bg: #312e81;
+  --official-text: #c7d2fe;
+  --custom-bg: #4c1d95;
+  --custom-text: #ddd6fe;
+
+  /* Ombre popover unique autorisée — charte §6.4 */
+  --shadow-popover: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
+
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+
+  /* Sidebar — mode sombre */
+  --sidebar: #1c1917;
+  --sidebar-foreground: #fafaf9;
+  --sidebar-primary: #818cf8;
+  --sidebar-primary-foreground: #c7d2fe;
+  --sidebar-accent: #312e81;
+  --sidebar-accent-foreground: #c7d2fe;
+  --sidebar-border: #44403c;
+  --sidebar-ring: #818cf8;
 }
 
 @layer base {
@@ -140,5 +228,25 @@ body {
   }
   html {
     @apply font-sans;
+  }
+
+  /* Bordures fines — charte §6.1 : 0.5px par défaut (au lieu du 1px de
+     Tailwind), pour la sensation légère et moderne demandée par la charte. */
+  .border,
+  .border-t,
+  .border-r,
+  .border-b,
+  .border-l,
+  .border-x,
+  .border-y {
+    border-width: 0.5px;
+  }
+}
+
+/* Impression de la matrice des coefficients (module Structure pédagogique) :
+   masque la coquille (rail, navbar) pour ne garder que la zone imprimable. */
+@media print {
+  [data-print-hide] {
+    display: none !important;
   }
 }

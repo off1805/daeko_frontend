@@ -5,9 +5,9 @@ import type { ColumnDef } from "@tanstack/react-table"
 import { XIcon } from "lucide-react"
 
 import { Button } from "~/components/ui/button"
-import { DataTableColumnHeader } from "~/modules/referentiel/presentation/components/data-table/data-table-column-header"
-import { FilterMenu } from "~/modules/referentiel/presentation/components/data-table/filter-menu"
-import { ReferenceDataTable } from "~/modules/referentiel/presentation/components/data-table/reference-data-table"
+import { DataTableColumnHeader } from "~/shared/presentation/data-table/data-table-column-header"
+import { FilterMenu } from "~/shared/presentation/data-table/filter-menu"
+import { ReferenceDataTable } from "~/shared/presentation/data-table/reference-data-table"
 import { EtatBadge } from "~/modules/referentiel/presentation/components/etat-badge"
 import type {
   CreateNiveauInput,
@@ -16,7 +16,7 @@ import type {
 import {
   updatableFields,
   type FormField,
-} from "~/modules/referentiel/presentation/components/forms/form-field"
+} from "~/shared/presentation/forms/form-field"
 import { ResourceActions } from "~/modules/referentiel/presentation/components/forms/resource-actions"
 import { ResourceCreateButton } from "~/modules/referentiel/presentation/components/forms/resource-create-button"
 import {

@@ -1,15 +1,6 @@
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "~/components/ui/breadcrumb"
 import { Separator } from "~/components/ui/separator"
-import { SidebarTrigger } from "~/components/ui/sidebar"
 import { NavUser } from "~/components/nav-user"
-import { TerminalIcon } from "lucide-react"
+import { ThemeToggle } from "~/components/theme-toggle"
 
 const user = {
   name: "shadcn",
@@ -18,49 +9,40 @@ const user = {
 }
 
 interface SiteNavbarProps {
-  /** Libellé de la page active, affiché comme feuille du fil d'Ariane. */
-  breadcrumb?: string
+  /**
+   * Titre contextuel affiché après le logo (ex : nom de la branche
+   * consultée). Ce n'est pas un fil d'Ariane générique — celui-ci vit en
+   * première ligne du contenu principal, propre à chaque écran.
+   */
+  title?: string
 }
 
 /**
  * Bandeau pleine largeur au sommet de l'écran, au-dessus de la sidebar.
- * Reste à l'intérieur de SidebarProvider (SidebarTrigger a besoin du
- * contexte sidebar) mais n'est pas contraint à la colonne de contenu.
  */
-export function SiteNavbar({ breadcrumb }: SiteNavbarProps) {
+export function SiteNavbar({ title }: SiteNavbarProps) {
   return (
-    <header className="sticky top-0 z-20 flex h-(--topbar-height) w-full shrink-0 items-center gap-2 border-b bg-background px-4">
+    <header
+      data-print-hide
+      className="sticky top-0 z-20 flex h-(--topbar-height) w-full shrink-0 items-center gap-2 border-b bg-background px-4"
+    >
       <a href="#" className="flex items-center gap-2">
-        <div className="flex aspect-square size-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
-          <TerminalIcon className="size-3.5" />
+        <div
+          aria-hidden="true"
+          className="flex aspect-square size-6 items-center justify-center rounded-[5px] bg-primary text-primary-foreground"
+        >
+          <span className="text-xs font-semibold leading-none">D</span>
         </div>
-        <span className="text-sm font-medium">Acme Inc</span>
+        <span className="text-sm font-medium tracking-[-0.02em] text-foreground">daeko</span>
       </a>
-      <Separator
-        orientation="vertical"
-        className="mx-1 data-vertical:h-4 data-vertical:self-auto"
-      />
-      <SidebarTrigger className="-ml-1" />
-      <Separator
-        orientation="vertical"
-        className="mr-2 data-vertical:h-4 data-vertical:self-auto"
-      />
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem className="hidden md:block">
-            <BreadcrumbLink href="#">Référentiel</BreadcrumbLink>
-          </BreadcrumbItem>
-          {breadcrumb ? (
-            <>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage>{breadcrumb}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </>
-          ) : null}
-        </BreadcrumbList>
-      </Breadcrumb>
-      <div className="ml-auto flex items-center">
+      {title ? (
+        <>
+          <Separator orientation="vertical" className="mx-1 data-vertical:h-4 data-vertical:self-auto" />
+          <span className="text-sm font-medium text-foreground">{title}</span>
+        </>
+      ) : null}
+      <div className="ml-auto flex items-center gap-1">
+        <ThemeToggle />
         <NavUser user={user} />
       </div>
     </header>

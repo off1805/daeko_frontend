@@ -33,6 +33,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <script
+          // Applique le thème sauvegardé avant le premier rendu pour éviter
+          // un flash clair->sombre (charte §11.2 : préférence utilisateur >
+          // préférence système > clair).
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("daeko-theme");if(t==="dark"||(!t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.classList.add("dark")}}catch(e){}})();`,
+          }}
+        />
       </head>
       <body>
         {children}

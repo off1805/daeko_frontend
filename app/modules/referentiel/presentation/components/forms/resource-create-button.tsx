@@ -9,9 +9,9 @@ import {
   getErrorMessage,
   type FormField,
   type ParsedFormValues,
-} from "~/modules/referentiel/presentation/components/forms/form-field"
+} from "~/shared/presentation/forms/form-field"
 import { REFERENTIEL_AUTEUR_ID } from "~/modules/referentiel/presentation/components/forms/referentiel-actor"
-import { ResourceFormSheet } from "~/modules/referentiel/presentation/components/forms/resource-form-sheet"
+import { ResourceFormSheet } from "~/shared/presentation/forms/resource-form-sheet"
 
 interface ResourceCreateButtonProps<TCreateInput, TDto> {
   label?: string

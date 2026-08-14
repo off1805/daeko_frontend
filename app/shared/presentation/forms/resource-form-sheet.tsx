@@ -25,7 +25,7 @@ import {
   parseFormValues,
   type FormField,
   type ParsedFormValues,
-} from "~/modules/referentiel/presentation/components/forms/form-field"
+} from "~/shared/presentation/forms/form-field"
 
 interface ResourceFormSheetProps {
   open: boolean

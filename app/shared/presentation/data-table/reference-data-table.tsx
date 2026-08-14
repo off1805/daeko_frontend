@@ -15,6 +15,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 
+import { cn } from "~/lib/utils"
 import {
   Table,
   TableBody,
@@ -23,9 +24,9 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table"
-import { DataTablePagination } from "~/modules/referentiel/presentation/components/data-table/data-table-pagination"
-import { DataTableToolbar } from "~/modules/referentiel/presentation/components/data-table/data-table-toolbar"
-import type { DataTableFilterConfig } from "~/modules/referentiel/presentation/components/data-table/data-table-types"
+import { DataTablePagination } from "~/shared/presentation/data-table/data-table-pagination"
+import { DataTableToolbar } from "~/shared/presentation/data-table/data-table-toolbar"
+import type { DataTableFilterConfig } from "~/shared/presentation/data-table/data-table-types"
 
 function globalRowFilter<TData>(
   row: Row<TData>,
@@ -96,11 +97,14 @@ export function ReferenceDataTable<TData>({
         filters={filters}
       />
 
-      <div className="overflow-hidden rounded-xl border border-border/60">
-        <Table>
+      <div className="overflow-hidden border-y border-border/60  h-full">
+        <Table className="h-full">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="hover:bg-transparent">
+              <TableRow
+                key={headerGroup.id}
+                className="divide-x divide-border/40 bg-muted/40 hover:bg-muted/40"
+              >
                 {headerGroup.headers.map((header) => (
                   <TableHead key={header.id}>
                     {header.isPlaceholder
@@ -114,7 +118,7 @@ export function ReferenceDataTable<TData>({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody>
+          <TableBody className="h-full">
             {isLoading ? (
               Array.from({ length: 5 }).map((_, index) => (
                 <TableRow key={index} className="hover:bg-transparent">
@@ -124,11 +128,15 @@ export function ReferenceDataTable<TData>({
                 </TableRow>
               ))
             ) : rows.length ? (
-              rows.map((row) => (
+              rows.map((row, index) => (
                 <TableRow
                   key={row.id}
                   onClick={() => onRowClick?.(row.original)}
-                  className={onRowClick ? "cursor-pointer" : undefined}
+                  className={cn(
+                    "divide-x divide-border/40",
+                    index % 2 === 1 && "bg-muted/20",
+                    onRowClick && "cursor-pointer",
+                  )}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -149,9 +157,11 @@ export function ReferenceDataTable<TData>({
             )}
           </TableBody>
         </Table>
-      </div>
 
-      <DataTablePagination table={table} />
+        <div className="border-t border-border/60 bg-muted/20 px-3 py-2">
+          <DataTablePagination table={table} />
+        </div>
+      </div>
     </div>
   )
 }

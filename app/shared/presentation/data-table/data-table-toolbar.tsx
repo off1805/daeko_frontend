@@ -1,7 +1,7 @@
 "use client"
 
 import type { Table } from "@tanstack/react-table"
-import { SlidersHorizontalIcon, XIcon } from "lucide-react"
+import { SearchIcon, SlidersHorizontalIcon, XIcon } from "lucide-react"
 
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
@@ -11,8 +11,8 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu"
-import { FilterMenu } from "~/modules/referentiel/presentation/components/data-table/filter-menu"
-import type { DataTableFilterConfig } from "~/modules/referentiel/presentation/components/data-table/data-table-types"
+import { FilterMenu } from "~/shared/presentation/data-table/filter-menu"
+import type { DataTableFilterConfig } from "~/shared/presentation/data-table/data-table-types"
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
@@ -31,13 +31,16 @@ export function DataTableToolbar<TData>({
     Boolean(table.getState().globalFilter)
 
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <Input
-        placeholder={searchPlaceholder}
-        value={(table.getState().globalFilter as string | undefined) ?? ""}
-        onChange={(event) => table.setGlobalFilter(event.target.value)}
-        className="h-7 w-48"
-      />
+    <div className="flex flex-wrap items-center gap-2 px-3">
+      <div className="relative">
+        <SearchIcon className="pointer-events-none absolute top-1/2 left-2 size-3.5 -translate-y-1/2 text-muted-foreground" />
+        <Input
+          placeholder={searchPlaceholder}
+          value={(table.getState().globalFilter as string | undefined) ?? ""}
+          onChange={(event) => table.setGlobalFilter(event.target.value)}
+          className="h-8 w-56 pl-7"
+        />
+      </div>
 
       {filters.length > 0 ? (
         <FilterMenu

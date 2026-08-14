@@ -76,6 +76,11 @@ const pages = [
     description: "Vue d'ensemble avec sidebar de navigation",
   },
   {
+    href: "/ecole",
+    text: "Administration école",
+    description: "Structure pédagogique de l'école (admin école)",
+  },
+  {
     href: "/ddd-example",
     text: "Exemple DDD",
     description: "Démo du module 'user' (domain/application/infra/UI)",

@@ -26,7 +26,7 @@ export function DataTablePagination<TData>({ table }: { table: Table<TData> }) {
   const totalRows = table.getFilteredRowModel().rows.length
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3 px-1 text-xs text-muted-foreground">
+    <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
       <span>
         {totalRows} ligne{totalRows > 1 ? "s" : ""} au total
       </span>

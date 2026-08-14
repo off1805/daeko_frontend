@@ -14,7 +14,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu"
-import type { DataTableFilterOption } from "~/modules/referentiel/presentation/components/data-table/data-table-types"
+import type { DataTableFilterOption } from "~/shared/presentation/data-table/data-table-types"
 
 const ALL_VALUE = "__all__"
 

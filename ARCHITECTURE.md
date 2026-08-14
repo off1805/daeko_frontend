@@ -70,6 +70,14 @@ routes → presentation, application (via modules/<context>/presentation)
 - Un module ne doit importer un **autre** module que via son
   `presentation/index.ts` (jamais directement `modules/x/domain/...` depuis
   un autre module) — ça garde chaque bounded context substituable.
+  **Exception documentée** : l'infrastructure d'un module peut importer
+  directement le `<context>.container.ts` d'un autre module pour des
+  lectures de validation croisée synchrones-en-pratique (ex : structure-
+  pédagogique valide ses activations contre le référentiel). Ça reproduit
+  côté mock les FK physiques inter-schémas que les dossiers d'implémen-
+  tation autorisent explicitement en v1 ("monolithe modulaire") ; le jour
+  où un module part en service séparé, cet appel devient un vrai call
+  HTTP sans changer la forme du code (déjà `async`/`await`).
 
 Ces règles ne sont pas imposées par un outil (par choix, pour rester léger) :
 elles reposent sur la relecture de code. Si le projet grossit, envisager

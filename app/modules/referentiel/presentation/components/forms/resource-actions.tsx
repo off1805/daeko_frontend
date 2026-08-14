@@ -5,14 +5,14 @@ import type { UseMutationResult } from "@tanstack/react-query"
 import { ArchiveIcon, PencilIcon } from "lucide-react"
 
 import { Button } from "~/components/ui/button"
-import { DeprecierDialog } from "~/modules/referentiel/presentation/components/forms/deprecier-dialog"
+import { DeprecierDialog } from "~/shared/presentation/forms/deprecier-dialog"
 import {
   getErrorMessage,
   type FormField,
   type ParsedFormValues,
-} from "~/modules/referentiel/presentation/components/forms/form-field"
+} from "~/shared/presentation/forms/form-field"
 import { REFERENTIEL_AUTEUR_ID } from "~/modules/referentiel/presentation/components/forms/referentiel-actor"
-import { ResourceFormSheet } from "~/modules/referentiel/presentation/components/forms/resource-form-sheet"
+import { ResourceFormSheet } from "~/shared/presentation/forms/resource-form-sheet"
 import type { EtatReferentiel } from "~/modules/referentiel/domain/shared/etat-referentiel"
 
 interface ResourceActionsProps<TUpdateInput, TDto> {

@@ -17,7 +17,7 @@ import type {
   UpdateSousSystemeInput,
   UpdateTypeEnseignementInput,
 } from "~/modules/referentiel/domain/repositories/referentiel.repository"
-import type { FormField } from "~/modules/referentiel/presentation/components/forms/form-field"
+import type { FormField } from "~/shared/presentation/forms/form-field"
 import { ResourceActions } from "~/modules/referentiel/presentation/components/forms/resource-actions"
 import { ResourceCreateButton } from "~/modules/referentiel/presentation/components/forms/resource-create-button"
 import {

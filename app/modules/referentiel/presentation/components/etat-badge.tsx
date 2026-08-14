@@ -3,7 +3,7 @@ import type { EtatReferentiel } from "~/modules/referentiel/domain/shared/etat-r
 
 export function EtatBadge({ etat }: { etat: EtatReferentiel }) {
   return (
-    <Badge variant={etat === "ACTIVE" ? "success" : "secondary"}>
+    <Badge variant={etat === "ACTIVE" ? "success" : "warning"}>
       {etat === "ACTIVE" ? "Actif" : "Déprécié"}
     </Badge>
   )

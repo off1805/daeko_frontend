@@ -3,9 +3,9 @@
 import * as React from "react"
 import type { ColumnDef } from "@tanstack/react-table"
 
-import { DataTableColumnHeader } from "~/modules/referentiel/presentation/components/data-table/data-table-column-header"
-import { ReferenceDataTable } from "~/modules/referentiel/presentation/components/data-table/reference-data-table"
-import type { DataTableFilterConfig } from "~/modules/referentiel/presentation/components/data-table/data-table-types"
+import { DataTableColumnHeader } from "~/shared/presentation/data-table/data-table-column-header"
+import { ReferenceDataTable } from "~/shared/presentation/data-table/reference-data-table"
+import type { DataTableFilterConfig } from "~/shared/presentation/data-table/data-table-types"
 import { EtatBadge } from "~/modules/referentiel/presentation/components/etat-badge"
 import type {
   CreateSerieInput,
@@ -14,7 +14,7 @@ import type {
 import {
   updatableFields,
   type FormField,
-} from "~/modules/referentiel/presentation/components/forms/form-field"
+} from "~/shared/presentation/forms/form-field"
 import { ResourceActions } from "~/modules/referentiel/presentation/components/forms/resource-actions"
 import { ResourceCreateButton } from "~/modules/referentiel/presentation/components/forms/resource-create-button"
 import {
