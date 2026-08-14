@@ -5,7 +5,7 @@ import { ConfigureEnTeteUseCase } from '~/modules/etablissement/application/use-
 import { ManageSignatairesUseCase } from '~/modules/etablissement/application/use-cases/manage-signataires.use-case';
 import { ChangerEtatCompteUseCase } from '~/modules/etablissement/application/use-cases/changer-etat-compte.use-case';
 import { ListAuditEtablissementUseCase } from '~/modules/etablissement/application/use-cases/list-audit-etablissement.use-case';
-import { EtablissementQueries } from '~/modules/etablissement/infrastructure/queries/etablissement.queries';
+import { EtablissementQueries } from '~/modules/etablissement/infrastructure/etablissement-queries.service';
 
 class EtablissementContainer {
   private static instance: EtablissementContainer;

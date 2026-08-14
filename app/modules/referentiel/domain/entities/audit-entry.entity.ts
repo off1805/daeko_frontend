@@ -25,24 +25,31 @@ export class AuditEntry extends Entity<AuditEntryProps> {
   get typeEntite(): string {
     return this.props.typeEntite;
   }
+
   get entiteId(): string {
     return this.props.entiteId;
   }
+
   get operation(): OperationAudit {
     return this.props.operation;
   }
+
   get utilisateurId(): string {
     return this.props.utilisateurId;
   }
+
   get horodatage(): string {
     return this.props.horodatage;
   }
+
   get valeursAvant(): Record<string, unknown> | null {
     return this.props.valeursAvant;
   }
+
   get valeursApres(): Record<string, unknown> | null {
     return this.props.valeursApres;
   }
+  
   get motif(): string | null {
     return this.props.motif;
   }
